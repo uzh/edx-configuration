@@ -64,7 +64,6 @@ XQWATCHER_PIP_EXTRA_ARGS: "-i {{ COMMON_PYPI_MIRROR_URL }}"
 #
 # vars are namespace with the module name.
 #
-xqwatcher_role_name: "xqwatcher"
 xqwatcher_service_name: "xqwatcher"
 xqwatcher_user: "xqwatcher"
 xqwatcher_module: "xqueue_watcher"
