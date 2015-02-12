@@ -4,10 +4,13 @@ import boto
 from datetime import datetime
 from boto.utils import get_instance_metadata
 
-instance_id = get_instance_metadata()['instance-id']
 ec2 = boto.connect_ec2()
-
+instance_id = get_instance_metadata()['instance-id']
 reservations = ec2.get_all_instances(instance_ids=[instance_id])
-terminate_time = datetime.strptime(str(reservations[0].instances[0].tags['instance_termination_time']), "%m-%d-%Y %H:%M:%S")
 
-print ("This system will be terminated on {:%b %d, %Y} at {:%H:%M:%S} UTC".format(terminate_time,terminate_time))
+try:
+    terminate_time = datetime.strptime(str(reservations[0].instances[0].tags['instance_termination_time']), "%m-%d-%Y %H:%M:%S")
+    print ("This system will be terminated on {:%b %d, %Y} at {:%H:%M:%S} UTC".format(terminate_time,terminate_time))
+
+except KeyError:
+    print ("This system will be terminated after the 7 Days of its Creation")
